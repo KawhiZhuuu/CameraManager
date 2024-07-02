@@ -806,6 +806,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
         
         qrCodeDetectionHandler = handler
         captureSession.addOutput(output)
+        qrOutput = output
         
         // Note: The object types must be set after the output was added to the capture session.
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
