@@ -876,7 +876,20 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
         }
         return false
     }
-    
+
+    /**
+    reload preview layer's frame with super layer
+    */
+    open func reloadPreviewLayerFrame() {
+        guard let embeddingView, let previewLayer else {
+            return
+        }
+        previewLayer.frame = embeddingView.bounds
+        if let previewLayerConnection = previewLayer.connection,
+           previewLayerConnection.isVideoOrientationSupported {
+            previewLayerConnection.videoOrientation = _currentPreviewVideoOrientation()
+        }
+    }
     // MARK: - AVCaptureFileOutputRecordingDelegate
     
     public func fileOutput(_: AVCaptureFileOutput, didStartRecordingTo _: URL, from _: [AVCaptureConnection]) {
